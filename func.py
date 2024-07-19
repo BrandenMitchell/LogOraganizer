@@ -2,6 +2,7 @@
 
 #finds network name (SSID) occurences, look for a sepcific networks occurence or all of them 
 def find_net_occ(masterFrame):
+
     user = input("Enter A for a specific network, B for all networks: ")
     if user.lower() == 'a':
         net_name = input("Enter network name: ")
@@ -30,6 +31,7 @@ def find_net_occ(masterFrame):
                     
 #finds security type occurences, look for a sepcific type or all types
 def find_sec_occ(masterFrame):
+
     user = input("Enter A for a specific security type, B all security types: ")
     if user.lower() == 'a':
         sec_name = input("Enter security Type name: ")
@@ -60,6 +62,7 @@ def find_sec_occ(masterFrame):
 
 #finds frequency occurences , lets you search a specific freq or all of them and displays the busiest at the end. 
 def find_freq_occ(masterFrame):
+
     user = input("Enter A for a specific frequency, B all frequencies and busiest freq: ")
     if user.lower() == 'a':
         freq_name = float(input("Enter Frequency: "))
@@ -102,39 +105,24 @@ def find_freq_occ(masterFrame):
         print("The busiest frequency is: " , busiest_freq, " with: ", freq_names_dict[busiest_freq], "occurences.")
 
 
-
-
-
-#finds what network gps coordinates reference (using the times they occur)
+#finds gps coordinates of networks based on time. 
+# Most recent gps reading for each network is displayed at the end with the most recent time found
 def Gps_network(masterFrame):
-
 
     gps_coord = masterFrame[masterFrame['B']== 'GPS']
     gps_coord_cleaned = gps_coord.drop(gps_coord[gps_coord['C'] == 'Error'].index)
-    #print(gps_coord_cleaned)
-    #networks
 
-    # gps_coord_cleaned = gps_coord.drop(gps_coord[gps_coord['C'] == 'Error'].index)
-    # print(gps_coord_cleaned)
-    
     networks = masterFrame.drop(masterFrame[masterFrame['B'] == 'GPS'].index)
-    
-    print(networks)
+    networks = networks.dropna(how="any")
 
-    # net_name_time ={}
-    # ti = networks.loc[:,'A']
-    # name = networks.loc[:,'C']
-    # keytimes = []
-    # for time in networks.loc[:,'A']:
-    #     for times in gps_coord_cleaned.loc[:,'A']:
-    #         if time == times:
-    #             keytimes.append(time)
+    print("...........")
+    print(".....................")
+    NetworkCoord = {}
+    for index, row in gps_coord_cleaned.iterrows():
+        
+        for indexs,rows in networks.iterrows(): 
+            if row['A'] == rows['A']:
+                NetworkCoord[rows['C']] = [row['C'],row['D'],"TIME:", row['A']]
 
-    
-    # print(keytimes)
-    # final = {}
-    # for time in keytimes:
-    #     for times in gps_coord_cleaned.loc[:,'A']:
-    #         if time == times:
-    #             final[time] = gps_coord_cleaned.loc['C']
-                
+    print("___NETWORK COORDS___")
+    print(NetworkCoord)    

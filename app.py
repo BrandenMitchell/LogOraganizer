@@ -4,7 +4,8 @@
     #-how often networks are seen
     #-how often security types were seen
     #-what frequencies were most busy
-    #-at what coordinates were networks found
+    #-at what coordinates were networks found using the times of the inputs
+
 
 #A,B,C,D,E,F paste at line one of any csv log
 

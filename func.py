@@ -101,8 +101,14 @@ def find_freq_occ(masterFrame):
         print(freq_names_dict)
         print("The busiest frequency is: " , busiest_freq, " with: ", freq_names_dict[busiest_freq], "occurences.")
 
-#finds what network gps coordinates reference
+
+
+
+
+#finds what network gps coordinates reference (using the times they occur)
 def Gps_network(masterFrame):
+
+
     gps_coord = masterFrame[masterFrame['B']== 'GPS']
     gps_coord_cleaned = gps_coord.drop(gps_coord[gps_coord['C'] == 'Error'].index)
     #print(gps_coord_cleaned)
@@ -113,21 +119,22 @@ def Gps_network(masterFrame):
     
     networks = masterFrame.drop(masterFrame[masterFrame['B'] == 'GPS'].index)
     
-    #print(networks)
-    net_name_time ={}
-    ti = networks.loc[:,'A']
-    name = networks.loc[:,'C']
-    keytimes = []
-    for time in networks.loc[:,'A']:
-        for times in gps_coord_cleaned.loc[:,'A']:
-            if time == times:
-                keytimes.append(time)
+    print(networks)
+
+    # net_name_time ={}
+    # ti = networks.loc[:,'A']
+    # name = networks.loc[:,'C']
+    # keytimes = []
+    # for time in networks.loc[:,'A']:
+    #     for times in gps_coord_cleaned.loc[:,'A']:
+    #         if time == times:
+    #             keytimes.append(time)
 
     
-    print(keytimes)
-    final = {}
-    for time in keytimes:
-        for times in gps_coord_cleaned.loc[:,'A']:
-            if time == times:
-                final[time] = gps_coord_cleaned.loc['C']
+    # print(keytimes)
+    # final = {}
+    # for time in keytimes:
+    #     for times in gps_coord_cleaned.loc[:,'A']:
+    #         if time == times:
+    #             final[time] = gps_coord_cleaned.loc['C']
                 

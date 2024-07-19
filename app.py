@@ -32,6 +32,7 @@ while(True):
         if user == '2':
             fname = input("enter csv file name: ")
             masterFrame = pd.read_csv(fname)
+            masterFrame.columns = ['A','B','C','D','E','F'] #try to use this to automate headers
             find_sec_occ(masterFrame)
 
         if user == '3':
@@ -42,7 +43,7 @@ while(True):
         if user == '4':
             fname = input("enter csv file name: ")
             masterFrame = pd.read_csv(fname)
-            find_net_occ(masterFrame)
+            Gps_network(masterFrame)
         
         elif user == 'q':
             break
